@@ -4,11 +4,10 @@ project(santa_claus VERSION 0.0.1)
 
 # Option to install targets to env location
 if(DEFINED ENV{SANTA_CLAUS_HOME})
-     message("-- Will install TEMPLATE binaries and libraries to location: " $ENV{SANTA_CLAUS_HOME})
-	 set(CMAKE_INSTALL_PREFIX $ENV{SANTA_CLAUS_HOME})
+     message("-- Will install SantaClaus binaries and libraries to location: " $ENV{SANTA_CLAUS_HOME})
+     set(CMAKE_INSTALL_PREFIX $ENV{SANTA_CLAUS_HOME})
 else(DEFINED ENV{SANTA_CLAUS_HOME})
-     message("-- Will install TEMPLATE binaries and libraries to location: " ${CMAKE_CURRENT_BINARY_DIR})
-	 set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR})
+     message("-- Will install SantaClaus binaries and libraries to the default  location: " ${CMAKE_INSTALL_PREFIX})
 endif(DEFINED ENV{SANTA_CLAUS_HOME})
 
 # Build type
@@ -24,3 +23,7 @@ option(WITH_testing "Allows tests to be run" ON)
 if(WITH_testing MATCHES ON)
    enable_testing()
 endif(WITH_testing MATCHES ON)
+
+add_executable(santa_claus main.c)
+
+
