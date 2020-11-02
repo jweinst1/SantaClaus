@@ -38,6 +38,15 @@ if(WITH_testing MATCHES ON)
    enable_testing()
 endif(WITH_testing MATCHES ON)
 
+set(SANTA_CLAUS_SOURCES 
+    toys-sc.c
+)
+
+add_library(santa_claus_l STATIC "${SANTA_CLAUS_SOURCES}")
+
 add_executable(santa_claus main.c)
+target_link_libraries(santa_claus santa_claus_l)
+
+install(TARGETS santa_claus DESTINATION bin)
 
 
