@@ -17,6 +17,20 @@ if(MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif(MSVC)
 
+# Check if some headers are present
+include(CheckIncludeFile)
+if(UNIX)
+    CHECK_INCLUDE_FILE("errno.h" HAVE_ERRNO_HEADER)
+    if(HAVE_ERRNO_HEADER)
+        add_definitions(-DHAVE_ERRNO)
+    endif(HAVE_ERRNO_HEADER)
+endif(UNIX)
+
+CHECK_INCLUDE_FILE("stdint.h" HAVE_STDINT_HEADER)
+if(HAVE_STDINT_HEADER)
+    add_definitions(-DHAVE_STDINT)
+endif(HAVE_STDINT_HEADER)
+
 # Options
 option(WITH_testing "Allows tests to be run" ON)
 
