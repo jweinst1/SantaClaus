@@ -10,8 +10,6 @@ else(DEFINED ENV{SANTA_CLAUS_HOME})
      message("-- Will install SantaClaus binaries and libraries to the default  location: " ${CMAKE_INSTALL_PREFIX})
 endif(DEFINED ENV{SANTA_CLAUS_HOME})
 
-# Build type
-message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 if(MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
@@ -40,6 +38,7 @@ endif(WITH_testing MATCHES ON)
 
 set(SANTA_CLAUS_SOURCES 
     toys-sc.c
+    exec-sc.c
 )
 
 add_library(santa_claus_l STATIC "${SANTA_CLAUS_SOURCES}")

@@ -11,6 +11,17 @@
 
 #define SANTA_CLAUS_REPL_SYM "<(^ _ ^)> "
 
+static int _is_exit_statement(const char* code)
+{
+    while (*code) {
+        if (*code != ' ' && *code != '\n' && *code != '\t') {
+            return 0 == strncmp(code, "exit", 4);
+        } 
+        ++code;
+    }
+    return 0;
+}
+
 typedef int (*code_func)(const char*);
 
 void repl_loop(code_func cb)
@@ -33,15 +44,24 @@ void repl_loop(code_func cb)
         #endif // !HAVE_ERRNO            
             break;
         } else {
-            // Success, pass to callback.
+            // check for exit statement
+            if (_is_exit_statement(line_buf))
+                break;
+            // Success, Check if it's an exit statement
             if (!cb(line_buf))
                 break;
         }
     }
 }
 
+int ScRepl_cb(const char* code)
+{
+    printf("Ho Ho got the code: %s", code);
+    return 1;
+}
 
 int main(int argc, char const* argv[]) {
     puts("SantaClaus: Ho Ho Ho!");
+    repl_loop(&ScRepl_cb);
     return 0;
 }

@@ -28,6 +28,11 @@ typedef struct {
     ScToyObj obj;
 } ScToy;
 
+typedef struct {
+    size_t size;
+    ScToy* toys;
+} ScToySeq;
+
 /**
  * This starts a descriptor sequence, and allows new descs to be
  * appended to it.
